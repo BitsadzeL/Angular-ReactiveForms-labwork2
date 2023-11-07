@@ -1,0 +1,136 @@
+{{applicantForm.value | json}}
+<div class="container mt-4">
+    <h4 class="mb-4">Job Application Form</h4>
+    <form [formGroup]="applicantForm" class="row">
+
+        
+      <div class="col-md-6">
+
+
+        <div class="form-group">
+            <label for="firstName">Firstname</label>
+            <input type="text" name="firstName" id="firstName" formControlName="firstName" class="form-control"
+                [ngClass]="{'is-invalid': applicantForm.get('firstName')?.touched && (applicantForm.get('firstName')?.hasError('required') || applicantForm.get('firstName')?.hasError('minlength') || applicantForm.get('firstName')?.hasError('forbiddenUsername')) }">
+            <div class="invalid-feedback">
+                <div *ngIf="applicantForm.get('firstName')?.touched && applicantForm.get('firstName')?.hasError('required')">Firstname is required</div>
+                <div *ngIf="applicantForm.get('firstName')?.touched && applicantForm.get('firstName')?.hasError('minlength')">Username should be at least 2 characters size</div>
+                <div *ngIf="applicantForm.get('firstName')?.touched && applicantForm.get('firstName')?.hasError('forbiddenUsername')">You cannot use 'admin' as a username</div>
+            </div>
+        </div>
+        
+        
+        
+          <!---->
+  
+        <div class="form-group">
+            
+          <label for="lastName">Lastname</label>
+          <input type="text" name="lastName" id="lastName" formControlName="lastName" class="form-control"
+           [ngClass]="{'is-invalid':applicantForm.get('lastName')?.value=='' && applicantForm.get('lastName')?.touched}">
+           <div class="invalid-feedback">Last name is required</div>
+        </div>
+      </div>
+  
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Select your gender</label>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="gender" id="male" value="male" formControlName="gender">
+            <label class="form-check-label" for="male">Male</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="gender" id="female" value="female" formControlName="gender">
+            <label class="form-check-label" for ="female">Female</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="gender" id="other" value="other" formControlName="gender">
+            <label class="form-check-label" for="other">Other</label>
+          </div>
+        </div>
+      </div>
+  
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="phoneNumber">Phone Number</label>
+          <input type="text" name="phoneNumber" id="phoneNumber" formControlName="phoneNumber" class="form-control"
+          [ngClass]="{'is-invalid':applicantForm.get('phoneNumber')?.value=='' && applicantForm.get('phoneNumber')?.touched}">
+          <div class="invalid-feedback">Phone number is required</div>
+        </div>
+  
+        <div class="form-group">
+          <label for="dateOfBirth">Date of Birth</label>
+          <input type="date" name="dateOfBirth" id="dateOfBirth" formControlName="dateOfBirth" class="form-control">
+        </div>
+      </div>
+  
+      <div class="col-md-6">
+        <div class="form-group">          
+        <label for="">Your vaccantion:</label>
+          <select name="position" id="position" formControlName="position" class="form-control">
+            <option value="" disabled>Select a desirable position</option>
+            <option *ngFor="let opt of positions" [value]="opt">{{opt}}</option>
+          </select>
+        </div>
+      </div>
+  
+      <div class="col-12">
+        <div formGroupName="address">
+          <div class="form-group">
+            <label for="city">City</label>
+            <input formControlName="city" type="text" class="form-control">
+          </div>
+  
+          <div class="form-group">
+            <label for="street">Street</label>
+            <input formControlName="street" type="text" class="form-control">
+          </div>
+  
+          <div class="form-group">
+            <label for="postal">Postal Code</label>
+            <input formControlName="postal" type="text" class="form-control">
+          </div>
+        </div>
+
+
+        <div class="form-group">
+            <label>Subscribe to News:</label>
+            <div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="subscribe" id="subscribe-yes" value="yes" formControlName="subscribe">
+                    <label class="form-check-label" for="subscribe-yes">Yes</label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="subscribe" id="subscribe-no" value="no" formControlName="subscribe">
+                    <label class="form-check-label" for="subscribe-no">No</label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-control" type="email" name="" id="" [disabled]="applicantForm.get('subscribe')?.value=='no' || applicantForm.get('subscribe')?.value==null" placeholder="If yes, enter your email">
+                </div>
+
+                <div class="form-group" *ngFor="let email of getEmailControls()">
+                  <input type="email"  class="form-control " style="margin-left:20px; margin-top:5px; width:99%">
+                </div>
+                
+                  
+            </div>
+                
+                  
+                </div>
+                
+                <button [disabled]="applicantForm.get('subscribe')?.value=='no' || applicantForm.get('subscribe')?.value==null " class="btn btn-primary" (click)="addAlternateEmail()">Add another email</button>
+                <br><br>
+                <button class="btn btn-primary" (click)="fillAddress()">Random address</button>
+            </div>
+        
+
+        
+
+          
+
+</form>
+        
+    
+
+  
