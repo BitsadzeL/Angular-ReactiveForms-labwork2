@@ -1,3 +1,5 @@
+create restriction in service and use it in component.
+
 # ForMidterm
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.7.
